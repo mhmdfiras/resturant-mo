@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Moamen Restaurant, the best food in town!">
+    <title>مطعم مؤمن</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/325775050_468022062205923_5737659138675706815_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=LM2Pr8mLdv0AX94dRv&_nc_ht=scontent.famm6-1.fna&oh=00_AfAEcwAefDFXCMWVNNMscbrLKLH45lJ-1x3tB0hRYHsZzg&oe=6536E5DA'); /* Replace with the correct Facebook image URL */
+            background-size: 200px 200px;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.1; /* Light opacity to not cover the content */
+            z-index: -1; /* Ensure watermark is behind the content */
+            pointer-events: none;
+        }
+
+        /* Sticky Navbar */
+        nav {
+            background-color: #5e3c99; /* Purple color */
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            color: #ddd;
+        }
+
+        /* Main Header */
+        header {
+            background-color: #5e3c99;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header span {
+            color: #ffcd00;
+        }
+
+        /* Content */
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1; /* Ensures content stays above the watermark */
+        }
+
+        h2 {
+            color: #5e3c99; /* Purple color */
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .menu-category {
+            margin-bottom: 30px;
+        }
+
+        .menu-category h3 {
+            background-color: #5e3c99; /* Purple color */
+            padding: 15px;
+            font-size: 22px;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .menu-category ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .menu-category li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px;
+            width: 48%; /* Each item takes half width on mobile */
+            border: 2px solid #5e3c99; /* Border to outline items */
+            font-size: 18px;
+        }
+
+        .price {
+            background-color: #5e3c99; /* Purple color */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .menu-table th,
+        .menu-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .menu-table th {
+            background-color: #5e3c99; /* Purple color */
+            color: white;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            margin-top: 50px;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-category ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .menu-category li {
+                width: 48%;
+            }
+
+            .price {
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 24px;
+                padding: 20px 0;
+            }
+
+            .menu-category h3 {
+                font-size: 20px;
+            }
+
+            .menu-category li {
+                font-size: 16px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav ul li a {
+                font-size: 16px;
+            }
+        }
+
+        /* JavaScript-controlled nav behavior */
+        .hide-nav {
+            top: -100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Watermark -->
+    <div class="watermark"></div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="#home">الصفحة الرئيسية</a></li>
+            <li><a href="#sandwiches">الساندويشات</a></li>
+            <li><a href="#frying">المقالي</a></li>
+            <li><a href="#mansaf">المنسف</a></li>
+            <li><a href="#mandi">طبيخ</a></li>
+            <li><a href="#tawasi">التواصي حسب الطلب</a></li>
+            <li><a href="#maqluba">المقلوبة والفريكة</a></li>
+            <li><a href="#daily">برنامج الوجبات اليومية</a></li>
+            <li><a href="#individual">الوجبات الفردية</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Header -->
+    <header id="home">
+        <div>مرحباً بكم في <span>مطعم مؤمن</span></div>
+    </header>
+
+    <!-- Sandwiches Section -->
+    <div class="content" id="sandwiches">
+        <h2>الساندويشات</h2>
+        <table class="menu-table">
+            <thead>
+                <tr>
+                    <th>الصنف</th>
+                    <th>خبز عادي</th>
+                    <th>خبز حمام</th>
+                    <th>خبز كعك</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>فلافل عادي</td>
+                    <td>0.35 JD</td>
+                    <td>0.40 JD</td>
+                    <td>0.60 JD</td>
+                </tr>
+                <tr>
+                    <td>مقالي</td>
+                    <td>0.40 JD</td>
+                    <td>0.40 JD</td>
+                    <td>0.60 JD</td>
+                </tr>
+                <tr>
+                    <td>فلافل مع مقالي</td>
+                    <td>0.45 JD</td>
+                    <td>0.50 JD</td>
+                    <td>0.75 JD</td>
+                </tr>
+                <tr>
+                    <td>بطاطا مقلية</td>
+                    <td>0.50 JD</td>
+                    <td>0.50 JD</td>
+                    <td>0.80 JD</td>
+                </tr>
+                <tr>
+                    <td>مفركة</td>
+                    <td>0.60 JD</td>
+                    <td>0.60 JD</td>
+                    <td>1.00 JD</td>
+                </tr>
+                <tr>
+                    <td>كبدة دجاج</td>
+                    <td>0.60 JD</td>
+                    <td>0.60 JD</td>
+                    <td>1.00 JD</td>
+                </tr>
+                <tr>
+                    <td>كبدة دجاج مع حمص</td>
+                    <td>0.75 JD</td>
+                    <td>0.75 JD</td>
+                    <td>1.25 JD</td>
+                </tr>
+                <tr>
+                    <td>فعفوط</td>
+                    <td>0.60 JD</td>
+                    <td>0.60 JD</td>
+                    <td>1.00 JD</td>
+                </tr>
+                <tr>
+                    <td>زِنجر حار او بارد</td>
+                    <td>1.20 JD</td>
+                    <td>1.20 JD</td>
+                    <td>1.50 JD</td>
+                </tr>
+                <tr>
+                    <td>سكالوب</td>
+                    <td></td>
+                    <td>1.00 JD</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>لحمة</td>
+                    <td>0.75 JD</td>
+                    <td>0.75 JD</td>
+                    <td>1.25 JD</td>
+                </tr>
+                <tr>
+                    <td>لحمة مع حمص</td>
+                    <td>0.90 JD</td>
+                    <td>0.90 JD</td>
+                    <td>1.50 JD</td>
+                </tr>
+                <tr>
+                    <td>إضافة جبنة</td>
+                    <td>0.25 JD</td>
+                    <td>0.25 JD</td>
+                    <td>0.35 JD</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Frying Section -->
+    <div class="content" id="frying">
+        <h2>المقالي</h2>
+        <div class="menu-category">
+            <h3>القلايات والصحون</h3>
+            <ul>
+                <li>قلاية بندوره مع ثوم وبصل<span class="price">1.25 JD</span></li>
+                <li>مفركة بطاطا مع بيض وبصل وبقدونس<span class="price">1.25 JD</span></li>
+                <li>مفركة بطاطا مع لحمة<span class="price">2.50 JD</span></li>
+                <li>قلاية بندوره مع لحمة<span class="price">2.50 JD</span></li>
+                <li>حمص باللحمة مع زيت زيتون<span class="price">2.50 JD</span></li>
+                <li>قلاية لحمة مع بصل<span class="price">2.50 JD</span></li>
+                <li>كبدة دجاج مع بصل وخضار ودبس رمان<span class="price">2.00 JD</span></li>
+                <li>كبدة دجاج على حمص<span class="price">2.50 JD</span></li>
+                <li>شكشوكة<span class="price">1.25 JD</span></li>
+                <li>صحن عجة بيض<span class="price">1.00 JD</span></li>
+                <li>صحن بيض<span class="price">0.75 JD</span></li>
+                <li>صحن ميمعة<span class="price">2.25 JD</span></li>
+                <li>فتة حمص بالمكسرات<span class="price">1.25 JD</span></li>
+                <li>فتة باللحمة والمكسرات<span class="price">2.50 JD</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mansaf Section -->
+    <div class="content" id="mansaf">
+        <h2>المنسف</h2>
+        <div class="menu-category">
+            <h3>سدر منسف</h3>
+            <ul>
+                <li>سدر منسف (3ك لحمه ) - (3ك جميد) - (3ك رز)<span class="price">35.00 JD</span></li>
+                <li>سدر منسف (2ك لحمه ) - (2ك جميد) - (2ك رز)<span class="price">24.00 JD</span></li>
+                <li>سدر منسف (1ك لحمه ) - (1ك جميد) - (1ك رز)<span class="price">15.00 JD</span></li>
+            </ul>
+        </div>
+        
+        <div class="menu-category">
+            <h3>سدر منسف لحم روماني جميد بلدي + سمن بلدي</h3>
+            <ul>
+                <li>منسف (2ك لحمه ) - (2ك جميد) - (2ك رز)<span class="price">32.00 JD</span></li>
+                <li>منسف (3ك لحمه ) - (3ك جميد) - (3ك رز)<span class="price">45.00 JD</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mandi Section -->
+    <div class="content" id="mandi">
+        <h2>طبيخ</h2>
+        <div class="menu-category">
+            <h3>المندي</h3>
+            <ul>
+                <li>سدر مندي (3)دجاجة – (3) رز +(4) لبن مع خيار + (4) دقوس<span class="price">22.00 JD</span></li>
+                <li>سدر مندي (2)دجاجة – (2) رز  + (3) لبن مع خيار + (3) دقوس<span class="price">16.00 JD</span></li>
+                <li>سدر مندي (1.5)دجاجة – (1.5ك) رز  + (3) لبن مع خيار + (3) دقوس<span class="price">12.00 JD</span></li>
+                <li>سدر مندي (1)دجاجة – (1ك) رز  + (2) لبن مع خيار + (2) دقوس<span class="price">8.00 JD</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Tawasi Section -->
+    <div class="content" id="tawasi">
+        <h2>التواصي حسب الطلب</h2>
+        <div class="menu-category">
+            <h3>التواصي</h3>
+            <ul>
+                <li>خاروف محشي رز + لبن بخيار + دقوس<span class="price">السعر حسب الطلب</span></li>
+                <li>ضلعة محشية رز + لبن بخيار + دقوس<span class="price">السعر حسب الطلب</span></li>
+                <li>رقاب محشية رز + لبن بخيار + دقوس<span class="price">السعر حسب الطلب</span></li>
+                <li>كتف مشوي مع رز من اختيارك + لبن بخيار + دقوس<span class="price">السعر حسب الطلب</span></li>
+                <li>فخذ مشوي مع رز من اختيارك + لبن بخيار + دقوس<span class="price">السعر حسب الطلب</span></li>
+                <li>صياية سمك<span class="price">السعر حسب الطلب</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Maqluba Section -->
+    <div class="content" id="maqluba">
+        <h2>المقلوبة والفريكة</h2>
+        <div class="menu-category">
+            <h3>المقلوبة والفريكة</h3>
+            <ul>
+                <li>سدر مقلوبة او فريكة 1دجاجة<span class="price">10.00 JD</span></li>
+                <li>سدر مقلوبة او فريكة 2دجاجة<span class="price">18.00 JD</span></li>
+                <li>سدر مقلوبة او فريكة 3دجاجة<span class="price">25.00 JD</span></li>
+                <h5>يضاف مع كل سدر لبن بخيار</h5>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Daily Program Section -->
+    <div class="content" id="daily">
+        <h2>برنامج الوجبات اليومية</h2>
+        <div class="menu-category">
+            <h3>الوجبات حسب الأيام</h3>
+            <ul>
+                <li>السبت: مندي + منسف +كبسة</li>
+                <li>الأحد: مندي + منسف + مقلوبة</li>
+                <li>الاثنين: مندي + منسف + بخاري</li>
+                <li>الثلاثاء: مندي + منسف + قدرة</li>
+                <li>الأربعاء: مندي + منسف + اورزي</li>
+                <li>الخميس: مندي + منسف + زرب</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Individual Section -->
+    <div class="content" id="individual">
+        <h2>الوجبات الفردية</h2>
+        <div class="menu-category">
+            <h3>الوجبات الفردية</h3>
+            <ul>
+                <li>منسف لحمة<span class="price">4.50 JD</span></li>
+                <li>منسف دجاج<span class="price">2.75 JD</span></li>
+                <li>رز من اختيارك + ربع دجاجة + لبن مع خيار + دقوس<span class="price">2.50 JD</span></li>
+                <li>رز من اختيارك + نص دجاجة + لبن مع خيار + دقوس<span class="price">4.00 JD</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script to hide/show nav on scroll -->
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.classList.add('hide-nav');
+            } else {
+                // Scrolling up
+                navbar.classList.remove('hide-nav');
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+
+    <footer>
+        &copy; 2024 Moamen Restaurant. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>
